@@ -16,7 +16,7 @@ O **OrigamiPay Connector** é um aplicativo backend para VTEX IO, projetado para
   ```bash
   yarn global add vtex
   ```
-- Conta VTEX disponível (sandbox ou produção)
+- Conta VTEX disponível
 
 ### **Primeiros Passos no CLI**
 ```bash
