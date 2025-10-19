@@ -1,0 +1,22 @@
+{
+  "memory": 256,
+  "ttl": 10,
+  "timeout": 10,
+  "minReplicas": 2,
+  "maxReplicas": 10,
+  "workers": 4,
+  "routes": {
+    "payments": {
+      "path": "/_v/origamipay/payments",
+      "public": true
+    },
+    "paymentCancellations": {
+      "path": "/_v/origamipay/payments/:paymentId/cancellations",
+      "public": true
+    },
+    "paymentCallback": {
+      "path": "/_v/origamipay/payments/:paymentId/callback",
+      "public": true
+    }
+  }
+}

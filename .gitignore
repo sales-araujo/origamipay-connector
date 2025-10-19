@@ -1,0 +1,11 @@
+# Node
+/node/node_modules/
+/node/.env
+/node/dist/
+/node/.DS_Store
+/node/*.log
+
+# Root
+*.log
+.DS_Store
+.env

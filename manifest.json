@@ -1,0 +1,74 @@
+{
+  "vendor": "portoarremate",
+  "name": "origamipay-connector",
+  "version": "0.0.1",
+  "title": "OrigamiPay Connector",
+  "description": "Conector de pagamentos integrando VTEX IO com a OrigamiPay.",
+  "builders": {
+    "node": "6.x",
+    "messages": "1.x"
+  },
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "api.vtex.com",
+        "path": "*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "portal.vtexcommercestable.com.br",
+        "path": "*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "{{account}}.vtexcommercestable.com.br",
+        "path": "*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "httpstat.us",
+        "path": "*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "*",
+        "path": "*"
+      }
+    }
+  ],
+  "settingsSchema": {
+    "title": "Configurações do OrigamiPay Connector",
+    "type": "object",
+    "properties": {
+      "apiBaseUrl": {
+        "title": "URL base da API Owl/OrigamiPay",
+        "type": "string",
+        "default": "https://mock.owlpay.local"
+      },
+      "appKey": {
+        "title": "App Key",
+        "type": "string"
+      },
+      "appToken": {
+        "title": "App Token",
+        "type": "string"
+      },
+      "enableMock": {
+        "title": "Habilitar Mock Interno",
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "required": []
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
+}
