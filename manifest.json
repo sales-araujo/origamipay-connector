@@ -1,5 +1,5 @@
 {
-  "vendor": "portoarremate",
+  "vendor": "{{account}}",
   "name": "origamipay-connector",
   "version": "0.0.1",
   "title": "OrigamiPay Connector",
