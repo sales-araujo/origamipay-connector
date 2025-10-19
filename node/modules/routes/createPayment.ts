@@ -33,7 +33,17 @@ export async function createPaymentHandler(ctx: Context) {
   }
 
   if (enableMock) {
-    return await mockCreateHandler(ctx)
+    await mockCreateHandler(ctx)
+    const mockResp = ctx.body as { status?: string; transactionId?: string; id?: string; nsu?: string }
+    ctx.status = 200
+    ctx.body = {
+      paymentId: body.paymentId,
+      status: mockResp.status,
+      tid: mockResp.transactionId || mockResp.id || body.paymentId,
+      nsu: mockResp.nsu || undefined,
+    }
+    
+    return
   }
 
   try {

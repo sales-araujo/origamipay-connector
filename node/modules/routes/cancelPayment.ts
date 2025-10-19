@@ -12,11 +12,34 @@ export async function cancelPaymentHandler(ctx: Context) {
   if (!body) {
     body = await coBody.json(ctx.req)
   }
-  const paymentId = ctx.vtex.routeParams?.paymentId
   const { appKey, appToken, enableMock } = getSettings(ctx)
+  let paymentId: string | undefined
+  if (ctx.vtex && ctx.vtex.routeParams && ctx.vtex.routeParams.paymentId) {
+    paymentId = ctx.vtex.routeParams.paymentId
+  } else if (ctx.params?.paymentId) {
+    paymentId = ctx.params.paymentId
+  } else if (ctx.request.url) {
+    const match = ctx.request.url.match(/payments\/([^\/]+)\/cancellations/)
+    if (match && match[1]) paymentId = match[1]
+  }
 
   if (enableMock) {
-    return await mockCancelHandler(ctx)
+    await mockCancelHandler(ctx)
+    const mockResp = ctx.body as { status?: string; id?: string; cancellationId?: string; nsu?: string }
+    if (!body || !body.cancellationId) {
+      ctx.status = 400
+      ctx.body = { message: 'Parâmetro cancellationId obrigatório!' }
+      return
+    }
+    ctx.status = 200
+    ctx.body = {
+      paymentId,
+      status: mockResp.status,
+      cancellationId: body.cancellationId,
+      providerResponse: mockResp
+    }
+    
+    return
   }
 
   if (!paymentId || !body?.cancellationId) {
