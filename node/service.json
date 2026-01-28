@@ -6,17 +6,34 @@
   "maxReplicas": 10,
   "workers": 4,
   "routes": {
-    "payments": {
-      "path": "/_v/origamipay/payments",
+    "authorize": {
+      "path": "/_v/api/origami-vtex-connector/payments",
       "public": true
     },
-    "paymentCancellations": {
-      "path": "/_v/origamipay/payments/:paymentId/cancellations",
+    "cancel": {
+      "path": "/_v/api/origami-vtex-connector/payments/:paymentId/cancellations",
       "public": true
     },
-    "paymentCallback": {
-      "path": "/_v/origamipay/payments/:paymentId/callback",
+    "settle": {
+      "path": "/_v/api/origami-vtex-connector/payments/:paymentId/settlements",
+      "public": true
+    },
+    "refund": {
+      "path": "/_v/api/origami-vtex-connector/payments/:paymentId/refunds",
+      "public": true
+    },
+    "inbound": {
+      "path": "/_v/api/origami-vtex-connector/payments/:paymentId/inbound/hooks",
+      "public": true
+    },
+    "eligibility": {
+      "path": "/_v/api/origami-vtex-connector/eligibility",
+      "public": true
+    },
+    "confirm": {
+      "path": "/_v/api/origami-vtex-connector/confirm",
       "public": true
     }
   }
 }
+

@@ -1,0 +1,5 @@
+{
+  "checkout/transactions/origami-vtex-connector": {
+    "component": "index"
+  }
+}

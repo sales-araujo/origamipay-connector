@@ -4,6 +4,10 @@
 /node/dist/
 /node/.DS_Store
 /node/*.log
+/react/node_modules/
+/react/dist/
+/react/.DS_Store
+/react/*.log
 
 # Root
 *.log

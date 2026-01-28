@@ -1,10 +1,11 @@
 {
-  "name": "origamipay-connector-node",
+  "name": "origami-vtex-connector-node",
   "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "@vtex/api": "6.50.1",
+    "@vtex/payment-provider": "1.x",
     "co-body": "^6.2.0"
   },
   "devDependencies": {

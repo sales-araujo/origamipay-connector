@@ -1,9 +1,11 @@
-import { ClientsConfig, Service, ServiceContext, method, RecorderState } from '@vtex/api'
+import { ClientsConfig, ServiceContext, RecorderState, method } from '@vtex/api'
+import { PaymentProviderService } from '@vtex/payment-provider'
+
 import { Clients } from './modules/clients'
-import { createPaymentHandler } from './modules/routes/createPayment'
-import { cancelPaymentHandler } from './modules/routes/cancelPayment'
-import { callbackHandler } from './modules/routes/callback'
 import { loadSettings } from './middlewares/loadSettings'
+import OrigamiPaymentConnector from './connector'
+import { eligibilityHandler } from './routes/eligibility'
+import { confirmHandler } from './routes/confirm'
 
 const TIMEOUT_MS = 8000
 
@@ -18,25 +20,21 @@ const clients: ClientsConfig<Clients> = {
 }
 
 declare global {
-  interface VTEXRouteParams {
-    [key: string]: string | undefined
-  }
   type Context = ServiceContext<Clients, RecorderState> & {
-    vtex: ServiceContext<Clients, RecorderState>["vtex"] & {
-      routeParams?: VTEXRouteParams;
-      settings?: import("./modules/utils/settings").AppSettings;
+    vtex: ServiceContext<Clients, RecorderState>['vtex'] & {
+      settings?: import('./modules/utils/settings').AppSettings
     }
-    request: ServiceContext<Clients, RecorderState>["request"] & {
-      body?: unknown;
+    request: ServiceContext<Clients, RecorderState>['request'] & {
+      body?: unknown
     }
   }
 }
 
-export default new Service({
+export default new PaymentProviderService({
   clients,
+  connector: OrigamiPaymentConnector,
   routes: {
-    payments: method({ POST: [loadSettings, createPaymentHandler] }),
-    paymentCancellations: method({ POST: [loadSettings, cancelPaymentHandler] }),
-    paymentCallback: method({ POST: [loadSettings, callbackHandler] })
-  }
+    eligibility: method({ POST: [loadSettings, eligibilityHandler] }),
+    confirm: method({ POST: [loadSettings, confirmHandler] }),
+  },
 })

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["global.d.ts", "node/**/*.ts"],
+  "exclude": ["node/**/node_modules", "react", "pages", "paymentProvider"]
+}
+
